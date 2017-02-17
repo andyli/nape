@@ -1,0 +1,11 @@
+language: haxe
+haxe: 3.4.0
+
+install:
+    - haxelib install hxcpp
+    - haxelib install nme
+
+script:
+    - haxe -cp src -cp test --no-inline -main DummyNapeMain -swf bin/nape.swf -swf-header 600:600:60:333333
+    - haxe -cp src -cp test --no-inline -main DummyJSMain   -js bin/nape.js -dce full
+    - haxe -cp src -cp test --no-inline -main DummyCppMain  -cpp bin/cpp --remap flash:nme -lib nme
